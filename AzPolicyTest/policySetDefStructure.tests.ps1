@@ -1,7 +1,7 @@
 [CmdletBinding()]
 Param (
   [Parameter(Mandatory = $true)]
-  [ValidateScript({Test-Path -Path $_})]
+  [ValidateScript({ Test-Path -Path $_ })]
   [string]$Path,
 
   [Parameter(Mandatory = $false)]
@@ -14,7 +14,7 @@ function CountPolicyDefinitionReferenceId {
     [object] $policySetObject,
     [string] $policyDefinitionReferenceId
   )
-  $policy = $policySetObject.properties.policyDefinitions | Where-Object -FilterScript {$_.policyDefinitionReferenceId -ieq $policyDefinitionReferenceId}
+  $policy = $policySetObject.properties.policyDefinitions | Where-Object -FilterScript { $_.policyDefinitionReferenceId -ieq $policyDefinitionReferenceId }
   $policy.count
 }
 
@@ -69,7 +69,7 @@ if ((Get-Item $path).PSIsContainer) {
   # -Exclude parameter in Get-ChildItem only works on file name, not parent folder name hence it's not used in get-childitem
   if ($ExcludePath) {
     $ExcludePath = $ExcludePath -join '|'
-    $files = $files | Where-Object -FilterScript {$_.FullName -notmatch $ExcludePath}
+    $files = $files | Where-Object -FilterScript { $_.FullName -notmatch $ExcludePath }
   }
 } else {
   Write-Verbose "Specified path '$path' is a file"
@@ -118,7 +118,7 @@ Foreach ($file in $files) {
     }
 
     Context 'Policy Set Definition Elements Value Test' -Tag 'PolicySetElements' {
-      It -Name 'Name value must not be null' -TestCases $testCase -Test {
+      It -Name 'Name value must not be null' -TestCases $testCase -Tag 'NameNotNull' -Test {
         param(
           [object] $json
         )
@@ -132,7 +132,7 @@ Foreach ($file in $files) {
         $json.name.length | Should -BeLessOrEqual 64
       }
 
-      It -Name 'Name value must not contain spaces' -TestCases $testCase -Test {
+      It -Name 'Name value must not contain spaces' -TestCases $testCase -Tag 'NoSpaceInName' -Test {
         param(
           [object] $json
         )
@@ -173,7 +173,7 @@ Foreach ($file in $files) {
         param(
           [object] $json
         )
-        $json.properties.displayName.substring($json.properties.displayName.length -1, 1) | Should -Not -Be '.'
+        $json.properties.displayName.substring($json.properties.displayName.length - 1, 1) | Should -Not -Be '.'
       }
 
       It -Name "Properties must contain 'description' element" -TestCases $testCase -Tag 'DescriptionExists' -Test {
@@ -267,7 +267,7 @@ Foreach ($file in $files) {
         $json.properties.description.length | Should -BeGreaterThan 0
       }
 
-      It -Name "Must contain 'Category' metadata" -TestCases $testCase -Test {
+      It -Name "Must contain 'Category' metadata" -TestCases $testCase -Tag 'CategoryExists' -Test {
         param(
           [object] $json
         )
@@ -318,7 +318,7 @@ Foreach ($file in $files) {
             if ($parameterConfig.type -ieq 'array') {
               $allInAllowedValues = $true
               foreach ($d in $parameterConfig.defaultValue) {
-                if ($parameterConfig.allowedValues -notcontains $d) {$allInAllowedValues = $false}
+                if ($parameterConfig.allowedValues -notcontains $d) { $allInAllowedValues = $false }
               }
               $allInAllowedValues | Should -Be $true
             } else {
@@ -369,7 +369,7 @@ Foreach ($file in $files) {
         }
 
         $policyDefinitionTestCase = @{
-          policyDefinition                 = $policyDefinition
+          policyDefinition = $policyDefinition
         }
         $policyDefinitionReferenceIdCountTestCase = @{
           policyDefinitionReferenceIdCount = CountPolicyDefinitionReferenceId -policySetObject $json -policyDefinitionReferenceId $policyDefinition.policyDefinitionReferenceId
@@ -441,7 +441,7 @@ Foreach ($file in $files) {
           }
 
           It -Name "Passed-in Parameter [<passedInParameter>] in $policyDefTestTitle must be defined in the Initiative Parameters" -TestCases (
-            $parameterIsDefinedTestCase | Where-Object -FilterScript {$_.valueExpectedFromInitiativeParameters -eq $true}
+            $parameterIsDefinedTestCase | Where-Object -FilterScript { $_.valueExpectedFromInitiativeParameters -eq $true }
           ) -Tag 'PolicyDefinitionParameterIsDefined' -Test {
             param(
               [bool] $parameterIsDefined
