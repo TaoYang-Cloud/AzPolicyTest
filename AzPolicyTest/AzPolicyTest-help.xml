@@ -1,782 +1,900 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<helpItems schema="maml" xmlns="http://msh">
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10"
-    xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10"
-    xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<?xml version="1.0" encoding="utf-8"?>
+<helpItems xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" schema="maml" xmlns="http://msh">
+  <command:command>
     <command:details>
       <command:name>Test-AzPolicyDefinition</command:name>
-      <command:verb>Test</command:verb>
-      <command:noun>AzPolicyDefinition</command:noun>
       <maml:description>
         <maml:para>Perform Pester Test to test Azure Policy definitions</maml:para>
       </maml:description>
+      <command:verb>Test</command:verb>
+      <command:noun>AzPolicyDefinition</command:noun>
     </command:details>
     <maml:description>
-      <maml:para></maml:para>
+      <maml:para />
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Test-AzPolicyDefinition</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)"
-          position="named" aliases="none">
-          <maml:name>path</maml:name>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>ExcludePath</maml:name>
           <maml:description>
-            <maml:para>Specify the file paths for the policy definition files.</maml:para>
+            <maml:para>Specify the excluded file paths for the policy definition files.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named"
-          aliases="none">
-          <maml:name>OutputFile</maml:name>
-          <maml:description>
-            <maml:para>@{Text=}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False"
-          position="named" aliases="none">
-          <maml:name>OutputFormat</maml:name>
-          <maml:description>
-            <maml:para>@{Text=}</maml:para>
-          </maml:description>
-          <command:parameterValueGroup>
-            <command:parameterValue required="false" command:variableLength="false">NUnitXml</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">LegacyNUnitXML
-            </command:parameterValue>
-          </command:parameterValueGroup>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>NUnitXml</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False"
-          position="named" aliases="none">
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
           <maml:name>ExcludeTags</maml:name>
           <maml:description>
             <maml:para>Specify the tags for excluded tests.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
-          <dev:type>
-            <maml:name>String[]</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False"
-          position="named" aliases="proga">
-          <maml:name>ProgressAction</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>Path</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ProgressAction Description }}</maml:para>
+            <maml:para>Specify the file paths for the policy definition files.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-          <dev:type>
-            <maml:name>ActionPreference</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False"
-          position="named" aliases="none">
-          <maml:name>excludePath</maml:name>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Test-AzPolicyDefinition</maml:name>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>ExcludePath</maml:name>
           <maml:description>
             <maml:para>Specify the excluded file paths for the policy definition files.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
-          <dev:type>
-            <maml:name>String[]</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>ExcludeTags</maml:name>
+          <maml:description>
+            <maml:para>Specify the tags for excluded tests.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>OutputFile</maml:name>
+          <maml:description>
+            <maml:para>Specify the file path to save the Pester test result.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>OutputFormat</maml:name>
+          <maml:description>
+            <maml:para>Specify the output format of the Pester test result file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>Specify the file paths for the policy definition files.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Test-AzPolicyDefinition</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>Content</maml:name>
+          <maml:description>
+            <maml:para>Specify the JSON content of a single file to test.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>ExcludeTags</maml:name>
+          <maml:description>
+            <maml:para>Specify the tags for excluded tests.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Test-AzPolicyDefinition</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>Content</maml:name>
+          <maml:description>
+            <maml:para>Specify the JSON content of a single file to test.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>ExcludeTags</maml:name>
+          <maml:description>
+            <maml:para>Specify the tags for excluded tests.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>OutputFile</maml:name>
+          <maml:description>
+            <maml:para>Specify the file path to save the Pester test result.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>OutputFormat</maml:name>
+          <maml:description>
+            <maml:para>Specify the output format of the Pester test result file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)"
-        position="named" aliases="none">
-        <maml:name>path</maml:name>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+        <maml:name>Content</maml:name>
         <maml:description>
-          <maml:para>Specify the file paths for the policy definition files.</maml:para>
+          <maml:para>Specify the JSON content of a single file to test.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named"
-        aliases="none">
-        <maml:name>OutputFile</maml:name>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+        <maml:name>ExcludePath</maml:name>
         <maml:description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para>Specify the excluded file paths for the policy definition files.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named"
-        aliases="none">
-        <maml:name>OutputFormat</maml:name>
-        <maml:description>
-          <maml:para>@{Text=}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>NUnitXml</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named"
-        aliases="none">
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
         <maml:name>ExcludeTags</maml:name>
         <maml:description>
           <maml:para>Specify the tags for excluded tests.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
-        <dev:type>
-          <maml:name>String[]</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named"
-        aliases="proga">
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+        <maml:name>OutputFile</maml:name>
+        <maml:description>
+          <maml:para>Specify the file path to save the Pester test result.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+        <maml:name>OutputFormat</maml:name>
+        <maml:description>
+          <maml:para>Specify the output format of the Pester test result file.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>Specify the file paths for the policy definition files.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
         <maml:name>ProgressAction</maml:name>
         <maml:description>
           <maml:para>{{ Fill ProgressAction Description }}</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-        <dev:type>
-          <maml:name>ActionPreference</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named"
-        aliases="none">
-        <maml:name>excludePath</maml:name>
-        <maml:description>
-          <maml:para>Specify the excluded file paths for the policy definition files.</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
-        <dev:type>
-          <maml:name>String[]</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <command:parameterValue required="false" variableLength="true">ActionPreference</command:parameterValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
         <dev:type>
-          <maml:name>System.String</maml:name>
+          <dev:name>System.String</dev:name>
         </dev:type>
         <maml:description>
-          <maml:para></maml:para>
+          <maml:para />
         </maml:description>
       </command:inputType>
     </command:inputTypes>
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <dev:name>System.Object</dev:name>
         </dev:type>
         <maml:description>
-          <maml:para></maml:para>
+          <maml:para />
         </maml:description>
       </command:returnValue>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para />
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>C:\PS&gt; Test-AzPolicyDefinition -Path "C:\PolicyDefinitionFolder"</dev:code>
-        <dev:remarks>
-          <maml:para>Test all Azure Policy definitions in a folder and its subfolders and display Pester result on the
-            PowerShell host</maml:para>
-        </dev:remarks>
+        <maml:title>--------- EXAMPLE 1 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>```powershell
+C:\PS&gt; Test-AzPolicyDefinition -Path "C:\PolicyDefinitionFolder"
+```</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>Test all Azure Policy definitions in a folder and its subfolders and display Pester result on the PowerShell host</maml:para>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>C:\PS&gt; Test-AzPolicyDefinition -Path "C:\PolicyDefinitionFolder\azurepolicy.json" -OutputFile
-          "C:\Temp\MyTestResult.xml"</dev:code>
-        <dev:remarks>
+        <maml:title>--------- EXAMPLE 2 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>```powershell
+C:\PS&gt; Test-AzPolicyDefinition -Path "C:\PolicyDefinitionFolder\azurepolicy.json" -OutputFile "C:\Temp\MyTestResult.xml"
+```</maml:para>
+          <maml:para>&#x80;</maml:para>
           <maml:para>Test a single Azure policy definition and store the test result in a file</maml:para>
-        </dev:remarks>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>C:\PS&gt; Test-AzPolicyDefinition -Path "C:\PolicyDefinitionFolder\azurepolicy.json" -OutputFile
-          "C:\Temp\MyTestResult.xml" -OutputFormat 'LegacyNUnitXML'</dev:code>
-        <dev:remarks>
-          <maml:para>Test a single Azure policy definition and store the test result in a file with the 'LegacyNUnitXML'
-            format</maml:para>
-        </dev:remarks>
+        <maml:title>--------- EXAMPLE 3 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>```powershell
+C:\PS&gt; Test-AzPolicyDefinition -Path "C:\PolicyDefinitionFolder\azurepolicy.json" -OutputFile "C:\Temp\MyTestResult.xml" -OutputFormat 'LegacyNUnitXML'
+```</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>Test a single Azure policy definition and store the test result in a file with the 'LegacyNUnitXML' format</maml:para>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
-        <dev:code>C:\PS&gt; Test-AzPolicyDefinition -Path "C:\PolicyDefinitionFolder\" -OutputFile
-          "C:\Temp\MyTestResult.xml" -ExcludeTags 'ParametersMaxCount', 'ParametersMinCount'</dev:code>
-        <dev:remarks>
-          <maml:para>Test all Azure Policy definitions in a folder, exclude tests with the `ParametersMaxCount` and
-            `ParametersMinCount` tags and store the test result in a file.</maml:para>
-        </dev:remarks>
+        <maml:title>--------- EXAMPLE 4 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>```powershell
+C:\PS&gt; Test-AzPolicyDefinition -Path "C:\PolicyDefinitionFolder\" -OutputFile "C:\Temp\MyTestResult.xml" -ExcludeTags 'ParametersMaxCount', 'ParametersMinCount'
+```</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>Test all Azure Policy definitions in a folder, exclude tests with the `ParametersMaxCount` and `ParametersMinCount` tags and store the test result in a file.</maml:para>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
-        <dev:code>C:\PS&gt; Test-AzPolicyDefinition -Path "C:\PolicyDefinitionFolder\" -OutputFile
-          "C:\Temp\MyTestResult.xml" -OutputFormat 'NUnitXML' -excludePath 'excludeFolder', 'main.json'</dev:code>
-        <dev:remarks>
-          <maml:para>Test all Azure Policy definitions in a folder, exclude all files in 'excludeFolder' folder and all
-            files with the name 'main.json' then store the test result in a file with the 'NUnitXML' format.</maml:para>
-        </dev:remarks>
+        <maml:title>--------- EXAMPLE 5 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>```powershell
+C:\PS&gt; Test-AzPolicyDefinition -Path "C:\PolicyDefinitionFolder\" -OutputFile "C:\Temp\MyTestResult.xml" -OutputFormat 'NUnitXML' -ExcludePath 'excludeFolder', 'main.json'
+```</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>Test all Azure Policy definitions in a folder, exclude all files in 'excludeFolder' folder and all files with the name 'main.json' then store the test result in a file with the 'NUnitXML' format.</maml:para>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
+      </command:example>
+      <command:example>
+        <maml:title>--------- EXAMPLE 6 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>```powershell
+C:\PS&gt; $json = Get-Content -Path "C:\PolicyDefinitionFolder\azurepolicy.json" -Raw
+C:\PS&gt; Test-AzPolicyDefinition -Content $json
+```</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>Test a single Azure Policy definition from in-memory content and display Pester result on the PowerShell host.</maml:para>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
+      </command:example>
+      <command:example>
+        <maml:title>--------- EXAMPLE 7 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>```powershell
+C:\PS&gt; $json = Get-Content -Path "C:\PolicyDefinitionFolder\azurepolicy.json" -Raw
+C:\PS&gt; Test-AzPolicyDefinition -Content $json -OutputFile "C:\Temp\MyTestResult.xml" -OutputFormat 'NUnitXML'
+```</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>Test a single Azure Policy definition from in-memory content and store the test result in a file with the 'NUnitXML' format.</maml:para>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
       </command:example>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version</maml:linkText>
-        <maml:uri>https://github.com/tyconsulting/AzPolicyTest/blob/master/help/Test-AzPolicyDefinition.md</maml:uri>
+        <command:uri>https://github.com/tyconsulting/AzPolicyTest/blob/master/help/Test-AzPolicyDefinition.md</command:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Online Version</maml:linkText>
+        <command:uri>https://github.com/tyconsulting/AzPolicyTest/blob/master/help/Test-AzPolicyDefinition.md</command:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10"
-    xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10"
-    xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+  <command:command>
     <command:details>
       <command:name>Test-AzPolicySetDefinition</command:name>
+      <maml:description>
+        <maml:para>Perform Pester Test to test Azure Policy Initiative (aka.
+policy set) definitions</maml:para>
+      </maml:description>
       <command:verb>Test</command:verb>
       <command:noun>AzPolicySetDefinition</command:noun>
-      <maml:description>
-        <maml:para>Perform Pester Test to test Azure Policy Initiative (aka. policy set) definitions</maml:para>
-      </maml:description>
     </command:details>
     <maml:description>
-      <maml:para></maml:para>
+      <maml:para />
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Test-AzPolicySetDefinition</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)"
-          position="named" aliases="none">
-          <maml:name>path</maml:name>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>ExcludePath</maml:name>
           <maml:description>
-            <maml:para>Specify the file paths for the policy definition files.</maml:para>
+            <maml:para>Specify the excluded file paths for the policy set definition files.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named"
-          aliases="none">
-          <maml:name>OutputFile</maml:name>
-          <maml:description>
-            <maml:para>@{Text=}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False"
-          position="named" aliases="none">
-          <maml:name>OutputFormat</maml:name>
-          <maml:description>
-            <maml:para>@{Text=}</maml:para>
-          </maml:description>
-          <command:parameterValueGroup>
-            <command:parameterValue required="false" command:variableLength="false">NUnitXml</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">LegacyNUnitXML
-            </command:parameterValue>
-          </command:parameterValueGroup>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>NUnitXml</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False"
-          position="named" aliases="none">
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
           <maml:name>ExcludeTags</maml:name>
           <maml:description>
             <maml:para>Specify the tags for excluded tests.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
-          <dev:type>
-            <maml:name>String[]</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False"
-          position="named" aliases="proga">
-          <maml:name>ProgressAction</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>Path</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ProgressAction Description }}</maml:para>
+            <maml:para>Specify the file paths for the policy set definition files.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-          <dev:type>
-            <maml:name>ActionPreference</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False"
-          position="named" aliases="none">
-          <maml:name>excludePath</maml:name>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Test-AzPolicySetDefinition</maml:name>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>ExcludePath</maml:name>
           <maml:description>
             <maml:para>Specify the excluded file paths for the policy set definition files.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
-          <dev:type>
-            <maml:name>String[]</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>ExcludeTags</maml:name>
+          <maml:description>
+            <maml:para>Specify the tags for excluded tests.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>OutputFile</maml:name>
+          <maml:description>
+            <maml:para>Specify the file path to save the Pester test result.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>OutputFormat</maml:name>
+          <maml:description>
+            <maml:para>Specify the output format of the Pester test result file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>Specify the file paths for the policy set definition files.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Test-AzPolicySetDefinition</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>Content</maml:name>
+          <maml:description>
+            <maml:para>Specify the JSON content of a single file to test.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>ExcludeTags</maml:name>
+          <maml:description>
+            <maml:para>Specify the tags for excluded tests.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Test-AzPolicySetDefinition</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>Content</maml:name>
+          <maml:description>
+            <maml:para>Specify the JSON content of a single file to test.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>ExcludeTags</maml:name>
+          <maml:description>
+            <maml:para>Specify the tags for excluded tests.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>OutputFile</maml:name>
+          <maml:description>
+            <maml:para>Specify the file path to save the Pester test result.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>OutputFormat</maml:name>
+          <maml:description>
+            <maml:para>Specify the output format of the Pester test result file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)"
-        position="named" aliases="none">
-        <maml:name>path</maml:name>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+        <maml:name>Content</maml:name>
         <maml:description>
-          <maml:para>Specify the file paths for the policy definition files.</maml:para>
+          <maml:para>Specify the JSON content of a single file to test.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named"
-        aliases="none">
-        <maml:name>OutputFile</maml:name>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+        <maml:name>ExcludePath</maml:name>
         <maml:description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para>Specify the excluded file paths for the policy set definition files.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named"
-        aliases="none">
-        <maml:name>OutputFormat</maml:name>
-        <maml:description>
-          <maml:para>@{Text=}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>NUnitXml</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named"
-        aliases="none">
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
         <maml:name>ExcludeTags</maml:name>
         <maml:description>
           <maml:para>Specify the tags for excluded tests.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
-        <dev:type>
-          <maml:name>String[]</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named"
-        aliases="proga">
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+        <maml:name>OutputFile</maml:name>
+        <maml:description>
+          <maml:para>Specify the file path to save the Pester test result.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+        <maml:name>OutputFormat</maml:name>
+        <maml:description>
+          <maml:para>Specify the output format of the Pester test result file.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>Specify the file paths for the policy set definition files.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
         <maml:name>ProgressAction</maml:name>
         <maml:description>
           <maml:para>{{ Fill ProgressAction Description }}</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-        <dev:type>
-          <maml:name>ActionPreference</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named"
-        aliases="none">
-        <maml:name>excludePath</maml:name>
-        <maml:description>
-          <maml:para>Specify the excluded file paths for the policy set definition files.</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
-        <dev:type>
-          <maml:name>String[]</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <command:parameterValue required="false" variableLength="true">ActionPreference</command:parameterValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
         <dev:type>
-          <maml:name>System.String</maml:name>
+          <dev:name>System.String</dev:name>
         </dev:type>
         <maml:description>
-          <maml:para></maml:para>
+          <maml:para />
         </maml:description>
       </command:inputType>
     </command:inputTypes>
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <dev:name>System.Object</dev:name>
         </dev:type>
         <maml:description>
-          <maml:para></maml:para>
+          <maml:para />
         </maml:description>
       </command:returnValue>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para />
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>C:\PS&gt; Test-AzPolicySetDefinition -Path "C:\PolicySetDefinitionFolder"</dev:code>
-        <dev:remarks>
-          <maml:para>Test all Azure Policy Initiative definitions in a folder and its subfolders and display Pester
-            result on the PowerShell host</maml:para>
-        </dev:remarks>
+        <maml:title>--------- EXAMPLE 1 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>```powershell
+C:\PS&gt; Test-AzPolicySetDefinition -Path "C:\PolicySetDefinitionFolder"
+```</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>Test all Azure Policy Initiative definitions in a folder and its subfolders and display Pester result on the PowerShell host</maml:para>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>C:\PS&gt; Test-AzPolicySetDefinition -Path "C:\PolicySetDefinitionFolder\azurepolicyset.json"
-          -OutputFile "C:\Temp\MyTestResult.xml"</dev:code>
-        <dev:remarks>
+        <maml:title>--------- EXAMPLE 2 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>```powershell
+C:\PS&gt; Test-AzPolicySetDefinition -Path "C:\PolicySetDefinitionFolder\azurepolicyset.json" -OutputFile "C:\Temp\MyTestResult.xml"
+```</maml:para>
+          <maml:para>&#x80;</maml:para>
           <maml:para>Test a single Azure policy Initiative definition and store the test result in a file</maml:para>
-        </dev:remarks>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>C:\PS&gt; Test-AzPolicySetDefinition -Path "C:\PolicySetDefinitionFolder\azurepolicyset.json"
-          -OutputFile "C:\Temp\MyTestResult.xml" -OutputFormat 'LegacyNUnitXML'</dev:code>
-        <dev:remarks>
-          <maml:para>Test a single Azure policy Initiative definition and store the test result in a file with the
-            'LegacyNUnitXML' format</maml:para>
-        </dev:remarks>
+        <maml:title>--------- EXAMPLE 3 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>```powershell
+C:\PS&gt; Test-AzPolicySetDefinition -Path "C:\PolicySetDefinitionFolder\azurepolicyset.json" -OutputFile "C:\Temp\MyTestResult.xml" -OutputFormat 'LegacyNUnitXML'
+```</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>Test a single Azure policy Initiative definition and store the test result in a file with the 'LegacyNUnitXML' format</maml:para>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
-        <dev:code>C:\PS&gt; Test-AzPolicySetDefinition -Path "C:\PolicyDefinitionFolder\" -OutputFile
-          "C:\Temp\MyTestResult.xml" -ExcludeTags 'ParametersMaxCount', 'ParametersMinCount'</dev:code>
-        <dev:remarks>
-          <maml:para>Test all Azure Policy initiative definitions in a folder, exclude tests with the
-            `ParametersMaxCount` and `ParametersMinCount` tags and store the test result in a file.</maml:para>
-        </dev:remarks>
+        <maml:title>--------- EXAMPLE 4 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>```powershell
+C:\PS&gt; Test-AzPolicySetDefinition -Path "C:\PolicyDefinitionFolder\" -OutputFile "C:\Temp\MyTestResult.xml" -ExcludeTags 'ParametersMaxCount', 'ParametersMinCount'
+```</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>Test all Azure Policy initiative definitions in a folder, exclude tests with the `ParametersMaxCount` and `ParametersMinCount` tags and store the test result in a file.</maml:para>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
-        <dev:code>C:\PS&gt; Test-AzPolicySetDefinition -Path "C:\PolicyDefinitionFolder\" -OutputFile
-          "C:\Temp\MyTestResult.xml" -OutputFormat 'NUnitXML' -excludePath 'excludeFolder', 'main.json'</dev:code>
-        <dev:remarks>
-          <maml:para>Test all Azure Policy initiative definitions in a folder, exclude all files in 'excludeFolder'
-            folder and all files with the name 'main.json' then store the test result in a file with the 'NUnitXML'
-            format.</maml:para>
-        </dev:remarks>
+        <maml:title>--------- EXAMPLE 5 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>```powershell
+C:\PS&gt; Test-AzPolicySetDefinition -Path "C:\PolicyDefinitionFolder\" -OutputFile "C:\Temp\MyTestResult.xml" -OutputFormat 'NUnitXML' -ExcludePath 'excludeFolder', 'main.json'
+```</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>Test all Azure Policy initiative definitions in a folder, exclude all files in 'excludeFolder' folder and all files with the name 'main.json' then store the test result in a file with the 'NUnitXML' format.</maml:para>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
+      </command:example>
+      <command:example>
+        <maml:title>--------- EXAMPLE 6 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>```powershell
+C:\PS&gt; $json = Get-Content -Path "C:\PolicySetDefinitionFolder\azurepolicyset.json" -Raw
+C:\PS&gt; Test-AzPolicySetDefinition -Content $json
+```</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>Test a single Azure Policy Initiative definition from in-memory content and display Pester result on the PowerShell host.</maml:para>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
+      </command:example>
+      <command:example>
+        <maml:title>--------- EXAMPLE 7 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>```powershell
+C:\PS&gt; $json = Get-Content -Path "C:\PolicySetDefinitionFolder\azurepolicyset.json" -Raw
+C:\PS&gt; Test-AzPolicySetDefinition -Content $json -OutputFile "C:\Temp\MyTestResult.xml" -OutputFormat 'NUnitXML'
+```</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>Test a single Azure Policy Initiative definition from in-memory content and store the test result in a file with the 'NUnitXML' format.</maml:para>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
       </command:example>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version</maml:linkText>
-        <maml:uri>https://github.com/tyconsulting/AzPolicyTest/blob/master/help/Test-AzPolicySetDefinition.md</maml:uri>
+        <command:uri>https://github.com/tyconsulting/AzPolicyTest/blob/master/help/Test-AzPolicySetDefinition.md</command:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Online Version</maml:linkText>
+        <command:uri>https://github.com/tyconsulting/AzPolicyTest/blob/master/help/Test-AzPolicySetDefinition.md</command:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10"
-    xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10"
-    xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+  <command:command>
     <command:details>
       <command:name>Test-JSONContent</command:name>
-      <command:verb>Test</command:verb>
-      <command:noun>JSONContent</command:noun>
       <maml:description>
         <maml:para>Perform Pester Test to validate syntax of JSON files.</maml:para>
       </maml:description>
+      <command:verb>Test</command:verb>
+      <command:noun>JSONContent</command:noun>
     </command:details>
     <maml:description>
-      <maml:para></maml:para>
+      <maml:para />
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Test-JSONContent</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)"
-          position="named" aliases="none">
-          <maml:name>path</maml:name>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>ExcludePath</maml:name>
           <maml:description>
-            <maml:para>Specify the file paths for the policy definition files.</maml:para>
+            <maml:para>Specify the excluded file paths for the policy definition files.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named"
-          aliases="none">
-          <maml:name>OutputFile</maml:name>
-          <maml:description>
-            <maml:para>@{Text=}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False"
-          position="named" aliases="none">
-          <maml:name>OutputFormat</maml:name>
-          <maml:description>
-            <maml:para>@{Text=}</maml:para>
-          </maml:description>
-          <command:parameterValueGroup>
-            <command:parameterValue required="false" command:variableLength="false">NUnitXml</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">LegacyNUnitXML
-            </command:parameterValue>
-          </command:parameterValueGroup>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>NUnitXml</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False"
-          position="named" aliases="none">
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
           <maml:name>ExcludeTags</maml:name>
           <maml:description>
             <maml:para>Specify the tags for excluded tests.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
-          <dev:type>
-            <maml:name>String[]</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False"
-          position="named" aliases="proga">
-          <maml:name>ProgressAction</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>Path</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ProgressAction Description }}</maml:para>
+            <maml:para>Specify the file paths for the policy definition files.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-          <dev:type>
-            <maml:name>ActionPreference</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False"
-          position="named" aliases="none">
-          <maml:name>excludePath</maml:name>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Test-JSONContent</maml:name>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>ExcludePath</maml:name>
           <maml:description>
             <maml:para>Specify the excluded file paths for the policy definition files.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
-          <dev:type>
-            <maml:name>String[]</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>ExcludeTags</maml:name>
+          <maml:description>
+            <maml:para>Specify the tags for excluded tests.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>OutputFile</maml:name>
+          <maml:description>
+            <maml:para>Specify the file path to save the Pester test result.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>OutputFormat</maml:name>
+          <maml:description>
+            <maml:para>Specify the output format of the Pester test result file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>Specify the file paths for the policy definition files.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Test-JSONContent</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>Content</maml:name>
+          <maml:description>
+            <maml:para>Specify the JSON content of a single file to test.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>ExcludeTags</maml:name>
+          <maml:description>
+            <maml:para>Specify the tags for excluded tests.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Test-JSONContent</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>Content</maml:name>
+          <maml:description>
+            <maml:para>Specify the JSON content of a single file to test.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>ExcludeTags</maml:name>
+          <maml:description>
+            <maml:para>Specify the tags for excluded tests.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>OutputFile</maml:name>
+          <maml:description>
+            <maml:para>Specify the file path to save the Pester test result.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>OutputFormat</maml:name>
+          <maml:description>
+            <maml:para>Specify the output format of the Pester test result file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)"
-        position="named" aliases="none">
-        <maml:name>path</maml:name>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+        <maml:name>Content</maml:name>
         <maml:description>
-          <maml:para>Specify the file paths for the policy definition files.</maml:para>
+          <maml:para>Specify the JSON content of a single file to test.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named"
-        aliases="none">
-        <maml:name>OutputFile</maml:name>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+        <maml:name>ExcludePath</maml:name>
         <maml:description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para>Specify the excluded file paths for the policy definition files.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named"
-        aliases="none">
-        <maml:name>OutputFormat</maml:name>
-        <maml:description>
-          <maml:para>@{Text=}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>NUnitXml</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named"
-        aliases="none">
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
         <maml:name>ExcludeTags</maml:name>
         <maml:description>
           <maml:para>Specify the tags for excluded tests.</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
-        <dev:type>
-          <maml:name>String[]</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named"
-        aliases="proga">
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+        <maml:name>OutputFile</maml:name>
+        <maml:description>
+          <maml:para>Specify the file path to save the Pester test result.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+        <maml:name>OutputFormat</maml:name>
+        <maml:description>
+          <maml:para>Specify the output format of the Pester test result file.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>Specify the file paths for the policy definition files.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
         <maml:name>ProgressAction</maml:name>
         <maml:description>
           <maml:para>{{ Fill ProgressAction Description }}</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-        <dev:type>
-          <maml:name>ActionPreference</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named"
-        aliases="none">
-        <maml:name>excludePath</maml:name>
-        <maml:description>
-          <maml:para>Specify the excluded file paths for the policy definition files.</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
-        <dev:type>
-          <maml:name>String[]</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <command:parameterValue required="false" variableLength="true">ActionPreference</command:parameterValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
         <dev:type>
-          <maml:name>System.String</maml:name>
+          <dev:name>System.String</dev:name>
         </dev:type>
         <maml:description>
-          <maml:para></maml:para>
+          <maml:para />
         </maml:description>
       </command:inputType>
     </command:inputTypes>
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <dev:name>System.Object</dev:name>
         </dev:type>
         <maml:description>
-          <maml:para></maml:para>
+          <maml:para />
         </maml:description>
       </command:returnValue>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para />
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>C:\PS&gt; Test-JSONContent -Path "C:\PolicyDefinitionFolder"</dev:code>
-        <dev:remarks>
-          <maml:para>Perform JSON Syntax testing on all JSON files in a folder and its subfolders and display Pester
-            result on the PowerShell host</maml:para>
-        </dev:remarks>
+        <maml:title>--------- EXAMPLE 1 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>```powershell
+C:\PS&gt; Test-JSONContent -Path "C:\PolicyDefinitionFolder"
+```</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>Perform JSON Syntax testing on all JSON files in a folder and its subfolders and display Pester result on the PowerShell host</maml:para>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>C:\PS&gt; Test-JSONContent -Path "C:\PolicyDefinitionFolder\azurepolicy.json" -OutputFile
-          "C:\Temp\MyTestResult.xml"</dev:code>
-        <dev:remarks>
-          <maml:para>Perform JSON Syntax testing on a single Azure Policy definition file store the test result in a
-            file</maml:para>
-        </dev:remarks>
+        <maml:title>--------- EXAMPLE 2 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>```powershell
+C:\PS&gt; Test-JSONContent -Path "C:\PolicyDefinitionFolder\azurepolicy.json" -OutputFile "C:\Temp\MyTestResult.xml"
+```</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>Perform JSON Syntax testing on a single Azure Policy definition file store the test result in a file</maml:para>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>C:\PS&gt; Test-JSONContent -Path "C:\PolicySetDefinitionFolder\azurepolicyset.json" -OutputFile
-          "C:\Temp\MyTestResult.xml" -OutputFormat 'LegacyNUnitXML'</dev:code>
-        <dev:remarks>
-          <maml:para>Perform JSON Syntax testing on a single Azure Policy Initiative definition file store the test
-            result in a file with the 'LegacyNUnitXML' format</maml:para>
-        </dev:remarks>
+        <maml:title>--------- EXAMPLE 3 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>```powershell
+C:\PS&gt; Test-JSONContent -Path "C:\PolicySetDefinitionFolder\azurepolicyset.json" -OutputFile "C:\Temp\MyTestResult.xml" -OutputFormat 'LegacyNUnitXML'
+```</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>Perform JSON Syntax testing on a single Azure Policy Initiative definition file store the test result in a file with the 'LegacyNUnitXML' format</maml:para>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
-        <dev:code>C:\PS&gt; Test-JSONContent -Path "C:\PolicyDefinitionFolder\" -OutputFile "C:\Temp\MyTestResult.xml"
-          -ExcludeTags 'JsonSyntax'</dev:code>
-        <dev:remarks>
-          <maml:para>Perform JSON Syntax testing on all JSON files in a folder and its subfolders, exclude test with the
-            `JsonSyntax` tag and store the test result in a file.</maml:para>
-        </dev:remarks>
+        <maml:title>--------- EXAMPLE 4 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>```powershell
+C:\PS&gt; Test-JSONContent -Path "C:\PolicyDefinitionFolder\" -OutputFile "C:\Temp\MyTestResult.xml" -ExcludeTags 'JsonSyntax'
+```</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>Perform JSON Syntax testing on all JSON files in a folder and its subfolders, exclude test with the `JsonSyntax` tag and store the test result in a file.</maml:para>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
-        <dev:code>C:\PS&gt; Test-JSONContent -Path "C:\PolicyDefinitionFolder\" -OutputFile "C:\Temp\MyTestResult.xml"
-          -OutputFormat 'NUnitXML' -excludePath 'excludeFolder', 'main.json'</dev:code>
-        <dev:remarks>
-          <maml:para>Perform JSON Syntax testing on all JSON files in a folder and its subfolders, exclude all files in
-            'excludeFolder' folder and all files with the name 'main.json' then store the test result in a file with the
-            'NUnitXML' format.</maml:para>
-        </dev:remarks>
+        <maml:title>--------- EXAMPLE 5 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>```powershell
+C:\PS&gt; Test-JSONContent -Path "C:\PolicyDefinitionFolder\" -OutputFile "C:\Temp\MyTestResult.xml" -OutputFormat 'NUnitXML' -ExcludePath 'excludeFolder', 'main.json'
+```</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>Perform JSON Syntax testing on all JSON files in a folder and its subfolders, exclude all files in 'excludeFolder' folder and all files with the name 'main.json' then store the test result in a file with the 'NUnitXML' format.</maml:para>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
+      </command:example>
+      <command:example>
+        <maml:title>--------- EXAMPLE 6 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>```powershell
+C:\PS&gt; $json = Get-Content -Path "C:\PolicyDefinitionFolder\azurepolicy.json" -Raw
+C:\PS&gt; Test-JSONContent -Content $json
+```</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>Perform JSON Syntax testing on the in-memory content of a single file and display Pester result on the PowerShell host.</maml:para>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
+      </command:example>
+      <command:example>
+        <maml:title>--------- EXAMPLE 7 ---------</maml:title>
+        <maml:introduction>
+          <maml:para>```powershell
+C:\PS&gt; $json = Get-Content -Path "C:\PolicyDefinitionFolder\azurepolicy.json" -Raw
+C:\PS&gt; Test-JSONContent -Content $json -OutputFile "C:\Temp\MyTestResult.xml" -OutputFormat 'NUnitXML'
+```</maml:para>
+          <maml:para>&#x80;</maml:para>
+          <maml:para>Perform JSON Syntax testing on the in-memory content of a single file and store the test result in a file with the 'NUnitXML' format.</maml:para>
+        </maml:introduction>
+        <dev:code />
+        <dev:remarks />
       </command:example>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version</maml:linkText>
-        <maml:uri>https://github.com/tyconsulting/AzPolicyTest/blob/master/help/Test-JSONContent.md</maml:uri>
+        <command:uri>https://github.com/tyconsulting/AzPolicyTest/blob/master/help/Test-JSONContent.md</command:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Online Version</maml:linkText>
+        <command:uri>https://github.com/tyconsulting/AzPolicyTest/blob/master/help/Test-JSONContent.md</command:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>

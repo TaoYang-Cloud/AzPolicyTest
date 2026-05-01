@@ -1,13 +1,15 @@
-[CmdletBinding()]
+[CmdletBinding(DefaultParameterSetName = 'Path')]
 Param (
-  [Parameter(Mandatory = $true)]
-  [ValidateScript({ Test-Path -Path $_ })]
-  [string]$Path,
+  [Parameter(ParameterSetName = 'Content', Mandatory = $true)]
+  [string] $Content,
 
-  [Parameter(Mandatory = $false)]
+  [Parameter(ParameterSetName = 'Path', Mandatory = $true)]
+  [ValidateScript({ Test-Path -Path $_ })]
+  [string] $Path,
+
+  [Parameter(ParameterSetName = 'Path', Mandatory = $false)]
   [string[]] $ExcludePath
 )
-Write-Verbose "Path: '$Path'"
 
 function CountPolicyDefinitionReferenceId {
   param(
@@ -55,39 +57,54 @@ function IsParameterDefined {
 }
 
 # Variables
+
 $TestName = 'Policy Set Definition Syntax Test'
 
-# Get JSON files
-if ((Get-Item $path).PSIsContainer) {
-  Write-Verbose "Specified path '$path' is a directory"
-  $gciParams = @{
-    Path    = $Path
-    Include = '*.json', '*.jsonc'
-    Recurse = $true
+$testCases = @()
+if ($PSCmdlet.ParameterSetName -ieq 'Path') {
+  Write-Verbose "Path: '$Path'"
+  # Get JSON files
+  if ((Get-Item $path).PSIsContainer) {
+    Write-Verbose "Specified path '$path' is a directory"
+    $gciParams = @{
+      Path    = $Path
+      Include = '*.json', '*.jsonc'
+      Recurse = $true
+    }
+    $files = Get-ChildItem @gciParams
+    # -Exclude parameter in Get-ChildItem only works on file name, not parent folder name hence it's not used in get-childitem
+    if ($ExcludePath) {
+      $ExcludePath = $ExcludePath -join '|'
+      $files = $files | Where-Object -FilterScript { $_.FullName -notmatch $ExcludePath }
+    }
+  } else {
+    Write-Verbose "Specified path '$path' is a file"
+    $files = Get-Item $path -Include '*.json', '*.jsonc'
   }
-  $files = Get-ChildItem @gciParams
-  # -Exclude parameter in Get-ChildItem only works on file name, not parent folder name hence it's not used in get-childitem
-  if ($ExcludePath) {
-    $ExcludePath = $ExcludePath -join '|'
-    $files = $files | Where-Object -FilterScript { $_.FullName -notmatch $ExcludePath }
+  Foreach ($file in $files) {
+    $fileName = (get-item $file).name
+    $fileFullName = (get-item $file).FullName
+    $fileRelativePath = GetRelativeFilePath -path $fileFullName
+    $json = ConvertFrom-Json -InputObject (Get-Content -Path $file -Raw) -ErrorAction SilentlyContinue
+    $testCases += @{
+      fileName         = $fileName
+      json             = $json
+      fileRelativePath = $fileRelativePath
+    }
   }
 } else {
-  Write-Verbose "Specified path '$path' is a file"
-  $files = Get-Item $path -Include '*.json', '*.jsonc'
+  $json = ConvertFrom-Json -InputObject $Content -ErrorAction SilentlyContinue
+  $defName = $json.name ?? 'UnknownPolicyDefinition'
+  $testCases += @{
+    fileName         = $defName
+    json             = $json
+    fileRelativePath = $defName
+  }
 }
 
-Foreach ($file in $files) {
-  Write-Verbose "Test '$file'" -verbose
-  $fileName = (get-item $file).name
-  $fileFullName = (get-item $file).FullName
-  $fileRelativePath = GetRelativeFilePath -path $fileFullName
-  $json = ConvertFrom-Json -InputObject (Get-Content -Path $file -Raw) -ErrorAction SilentlyContinue
-  $testCase = @{
-    fileName         = $fileName
-    json             = $json
-    fileRelativePath = $fileRelativePath
-  }
-  Describe "[$fileRelativePath]:: $TestName" -Tag 'policyDefSyntax' {
+Foreach ($testCase in $testCases) {
+  Write-Verbose "Test '$($testCase.fileName)'" -verbose
+  Describe "[$($testCase.fileRelativePath)]: $TestName" -Tag 'policyDefSyntax' {
     BeforeAll {
       # Variables - Use Script scope to make PSScriptAnalyzer happy <https://github.com/PowerShell/PSScriptAnalyzer/issues/1641>
       $Script:ValidParameterTypes = [string[]](

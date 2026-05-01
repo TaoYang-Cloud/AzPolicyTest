@@ -8,21 +8,38 @@ schema: 2.0.0
 # Test-AzPolicySetDefinition
 
 ## SYNOPSIS
+
 Perform Pester Test to test Azure Policy Initiative (aka.
 policy set) definitions
 
 ## SYNTAX
 
-### NoOutputFile
+### PathNoOutputFile (Default)
+
 ```
-Test-AzPolicySetDefinition -path <String> [-excludePath <String[]>] [-ExcludeTags <String[]>]
+Test-AzPolicySetDefinition -Path <String> [-ExcludePath <String[]>] [-ExcludeTags <String[]>]
  [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
-### ProduceOutputFile
+### PathProduceOutputFile
+
 ```
-Test-AzPolicySetDefinition -path <String> [-excludePath <String[]>] [-ExcludeTags <String[]>]
+Test-AzPolicySetDefinition -Path <String> [-ExcludePath <String[]>] [-ExcludeTags <String[]>]
  -OutputFile <String> [-OutputFormat <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+```
+
+### ContentNoOutputFile
+
+```
+Test-AzPolicySetDefinition -Content <String> [-ExcludeTags <String[]>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
+```
+
+### ContentProduceOutputFile
+
+```
+Test-AzPolicySetDefinition -Content <String> [-ExcludeTags <String[]>] -OutputFile <String>
+ [-OutputFormat <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -64,19 +81,70 @@ Test all Azure Policy initiative definitions in a folder, exclude tests with the
 ### EXAMPLE 5
 
 ```powershell
-C:\PS> Test-AzPolicySetDefinition -Path "C:\PolicyDefinitionFolder\" -OutputFile "C:\Temp\MyTestResult.xml" -OutputFormat 'NUnitXML' -excludePath 'excludeFolder', 'main.json'
+C:\PS> Test-AzPolicySetDefinition -Path "C:\PolicyDefinitionFolder\" -OutputFile "C:\Temp\MyTestResult.xml" -OutputFormat 'NUnitXML' -ExcludePath 'excludeFolder', 'main.json'
 ```
 
 Test all Azure Policy initiative definitions in a folder, exclude all files in 'excludeFolder' folder and all files with the name 'main.json' then store the test result in a file with the 'NUnitXML' format.
 
+### EXAMPLE 6
+
+```powershell
+C:\PS> $json = Get-Content -Path "C:\PolicySetDefinitionFolder\azurepolicyset.json" -Raw
+C:\PS> Test-AzPolicySetDefinition -Content $json
+```
+
+Test a single Azure Policy Initiative definition from in-memory content and display Pester result on the PowerShell host.
+
+### EXAMPLE 7
+
+```powershell
+C:\PS> $json = Get-Content -Path "C:\PolicySetDefinitionFolder\azurepolicyset.json" -Raw
+C:\PS> Test-AzPolicySetDefinition -Content $json -OutputFile "C:\Temp\MyTestResult.xml" -OutputFormat 'NUnitXML'
+```
+
+Test a single Azure Policy Initiative definition from in-memory content and store the test result in a file with the 'NUnitXML' format.
+
 ## PARAMETERS
 
-### -path
-Specify the file paths for the policy definition files.
+### -Path
+
+Specify the file paths for the policy set definition files.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: PathNoOutputFile, PathProduceOutputFile
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -ExcludePath
+
+Specify the excluded file paths for the policy set definition files.
+
+```yaml
+Type: String[]
+Parameter Sets: PathNoOutputFile, PathProduceOutputFile
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Content
+
+Specify the JSON content of a single file to test.
+
+```yaml
+Type: String
+Parameter Sets: ContentNoOutputFile, ContentProduceOutputFile
 Aliases:
 
 Required: True
@@ -87,11 +155,12 @@ Accept wildcard characters: False
 ```
 
 ### -OutputFile
-@{Text=}
+
+Specify the file path to save the Pester test result.
 
 ```yaml
 Type: String
-Parameter Sets: ProduceOutputFile
+Parameter Sets: PathProduceOutputFile, ContentProduceOutputFile
 Aliases:
 
 Required: True
@@ -102,11 +171,12 @@ Accept wildcard characters: False
 ```
 
 ### -OutputFormat
-@{Text=}
+
+Specify the output format of the Pester test result file.
 
 ```yaml
 Type: String
-Parameter Sets: ProduceOutputFile
+Parameter Sets: PathProduceOutputFile, ContentProduceOutputFile
 Aliases:
 Accepted values: NUnitXml, LegacyNUnitXML
 
@@ -118,6 +188,7 @@ Accept wildcard characters: False
 ```
 
 ### -ExcludeTags
+
 Specify the tags for excluded tests.
 
 ```yaml
@@ -133,6 +204,7 @@ Accept wildcard characters: False
 ```
 
 ### -ProgressAction
+
 {{ Fill ProgressAction Description }}
 
 ```yaml
@@ -147,33 +219,20 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -excludePath
-Specify the excluded file paths for the policy set definition files.
-
-```yaml
-Type: String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### System.String
+
 ## OUTPUTS
 
 ### System.Object
+
 ## NOTES
 
 ## RELATED LINKS
 
 [Online Version](https://github.com/tyconsulting/AzPolicyTest/blob/master/help/Test-AzPolicySetDefinition.md)
-

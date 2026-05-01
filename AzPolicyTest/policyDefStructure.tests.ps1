@@ -1,15 +1,17 @@
 #Requires -Version 7
 
-[CmdletBinding()]
+[CmdletBinding(DefaultParameterSetName = 'Path')]
 Param (
-  [Parameter(Mandatory = $true)]
+  [Parameter(ParameterSetName = 'Content', Mandatory = $true)]
+  [string] $Content,
+
+  [Parameter(ParameterSetName = 'Path', Mandatory = $true)]
   [ValidateScript({ Test-Path -Path $_ })]
   [string] $Path,
 
-  [Parameter(Mandatory = $false)]
+  [Parameter(ParameterSetName = 'Path', Mandatory = $false)]
   [string[]] $ExcludePath
 )
-Write-Verbose "Path: '$Path'"
 
 #Function to determine the policy effect from the definition
 function GetPolicyEffect {
@@ -123,46 +125,65 @@ function getBypassedAliases {
   , $byPassedAliases
 }
 
-# Get JSON files
-if ((Get-Item $path).PSIsContainer) {
-  Write-Verbose "Specified path '$path' is a directory"
-  $gciParams = @{
-    Path    = $Path
-    Include = '*.json', '*.jsonc'
-    Recurse = $true
-  }
-  $files = Get-ChildItem @gciParams
-  # -Exclude parameter in Get-ChildItem only works on file name, not parent folder name hence it's not used in get-childitem
-  if ($ExcludePath) {
-    $ExcludePath = $ExcludePath -join '|'
-    $files = $files | Where-Object -FilterScript { $_.FullName -notmatch $ExcludePath }
-  }
+$testCases = @()
+if ($PSCmdlet.ParameterSetName -ieq 'Path') {
+  Write-Verbose "Path: '$Path'"
+  # Get JSON files
+  if ((Get-Item $path).PSIsContainer) {
+    Write-Verbose "Specified path '$path' is a directory"
+    $gciParams = @{
+      Path    = $Path
+      Include = '*.json', '*.jsonc'
+      Recurse = $true
+    }
+    $files = Get-ChildItem @gciParams
+    # -Exclude parameter in Get-ChildItem only works on file name, not parent folder name hence it's not used in get-childitem
+    if ($ExcludePath) {
+      $ExcludePath = $ExcludePath -join '|'
+      $files = $files | Where-Object -FilterScript { $_.FullName -notmatch $ExcludePath }
+    }
 
+  } else {
+    Write-Verbose "Specified path '$path' is a file"
+    $files = Get-Item $path -Include '*.json', '*.jsonc'
+  }
+  foreach ($file in $files) {
+    $fileName = (get-item $file).name
+    $fileFullName = (get-item $file).FullName
+    $fileRelativePath = GetRelativeFilePath -path $fileFullName
+    #check if the file is inside a git repository
+    $json = ConvertFrom-Json -InputObject (Get-Content -Path $file -Raw) -ErrorAction SilentlyContinue
+    $testCases += @{
+      fileName         = $fileName
+      json             = $json
+      policyEffect     = GetPolicyEffect -policyObject $json
+      fileRelativePath = $fileRelativePath
+      bypassedTypes    = getBypassedTypes -policyObject $json
+      bypassedAliases  = getBypassedAliases -policyObject $json
+    }
+  }
 } else {
-  Write-Verbose "Specified path '$path' is a file"
-  $files = Get-Item $path -Include '*.json', '*.jsonc'
-}
-
-# Policy Definition Tests
-foreach ($file in $files) {
-  Write-Verbose "Test '$file'" -verbose
-  $fileName = (get-item $file).name
-  $fileFullName = (get-item $file).FullName
-  $fileRelativePath = GetRelativeFilePath -path $fileFullName
-  #check if the file is inside a git repository
-  $json = ConvertFrom-Json -InputObject (Get-Content -Path $file -Raw) -ErrorAction SilentlyContinue
-  $testCase = @{
-    fileName         = $fileName
+  $json = ConvertFrom-Json -InputObject $Content -ErrorAction SilentlyContinue
+  $defName = $json.name ?? 'UnknownPolicyDefinition'
+  $testCases += @{
+    fileName         = $defName
     json             = $json
     policyEffect     = GetPolicyEffect -policyObject $json
-    fileRelativePath = $fileRelativePath
+    fileRelativePath = $defName
     bypassedTypes    = getBypassedTypes -policyObject $json
     bypassedAliases  = getBypassedAliases -policyObject $json
   }
-  Write-Verbose "[$file] Policy Effect: $($testCase.policyEffect.effects)"
+}
+
+
+# Policy Definition Tests
+foreach ($testCase in $testCases) {
+  Write-Verbose "Test '$($testCase.fileName)'" -verbose
+
+  Write-Verbose "[$($testCase.fileName)] Policy Effect: $($testCase.policyEffect.effects)"
 
   # Start Pester tests
-  Describe "[$fileRelativePath]: Policy Definition Syntax Test" -Tag 'policyDefSyntax' {
+  Describe "[$($testCase.fileRelativePath)]: Policy Definition Syntax Test" -Tag 'policyDefSyntax' {
 
     BeforeAll {
       # Variables - Use Script scope to make PSScriptAnalyzer happy <https://github.com/PowerShell/PSScriptAnalyzer/issues/1641>
