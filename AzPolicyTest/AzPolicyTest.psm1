@@ -1,24 +1,30 @@
 # .EXTERNALHELP AzPolicyTest-help.xml
 Function Test-JSONContent {
-  [CmdLetBinding()]
+  [CmdLetBinding(DefaultParameterSetName = 'PathNoOutputFile')]
   Param (
-    [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'ProduceOutputFile', HelpMessage = 'Specify the file paths for the policy definition files.')]
-    [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'NoOutputFile', HelpMessage = 'Specify the file paths for the policy definition files.')]
+    [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'PathProduceOutputFile', HelpMessage = 'Specify the file paths for the policy definition files.')]
+    [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'PathNoOutputFile', HelpMessage = 'Specify the file paths for the policy definition files.')]
     [String] $Path,
 
-    [Parameter(Mandatory = $false, ParameterSetName = 'ProduceOutputFile', HelpMessage = 'Specify the excluded file paths for the policy definition files.')]
-    [Parameter(Mandatory = $false, ParameterSetName = 'NoOutputFile', HelpMessage = 'Specify the excluded file paths for the policy definition files.')]
+    [Parameter(Mandatory = $false, ParameterSetName = 'PathProduceOutputFile', HelpMessage = 'Specify the excluded file paths for the policy definition files.')]
+    [Parameter(Mandatory = $false, ParameterSetName = 'PathNoOutputFile', HelpMessage = 'Specify the excluded file paths for the policy definition files.')]
     [String[]] $ExcludePath,
 
-    [Parameter(Mandatory = $false, ParameterSetName = 'ProduceOutputFile', HelpMessage = 'Specify the tags for excluded tests.')]
-    [Parameter(Mandatory = $false, ParameterSetName = 'NoOutputFile', HelpMessage = 'Specify the tags for excluded tests.')]
+    [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'ContentProduceOutputFile', HelpMessage = 'Specify the JSON content of a single file to test.')]
+    [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'ContentNoOutputFile', HelpMessage = 'Specify the JSON content of a single file to test.')]
+    [ValidateNotNullOrEmpty()]
+    [String] $Content,
+
+    [Parameter(Mandatory = $false, HelpMessage = 'Specify the tags for excluded tests.')]
     [String[]] $ExcludeTags = @(),
 
-    [Parameter(ParameterSetName = 'ProduceOutputFile', Mandatory = $true)]
+    [Parameter(ParameterSetName = 'PathProduceOutputFile', Mandatory = $true)]
+    [Parameter(ParameterSetName = 'ContentProduceOutputFile', Mandatory = $true)]
     [ValidateNotNullOrEmpty()]
     [string] $OutputFile,
 
-    [Parameter(ParameterSetName = 'ProduceOutputFile', Mandatory = $false)]
+    [Parameter(ParameterSetName = 'PathProduceOutputFile', Mandatory = $false)]
+    [Parameter(ParameterSetName = 'ContentProduceOutputFile', Mandatory = $false)]
     [ValidateSet('NUnitXml', 'LegacyNUnitXML')]
     [string] $OutputFormat = 'NUnitXml'
   )
@@ -26,13 +32,19 @@ Function Test-JSONContent {
   Begin {
     # Test files
     $FileContentTestFilePath = Join-Path $PSScriptRoot 'fileContent.tests.ps1'
-    Write-Verbose "JSON Content Pester Test file Path: '$DefinitionStructureTestFilePath'" -verbose
+    Write-Verbose "JSON Content Pester Test file Path: '$FileContentTestFilePath'" -verbose
   }
 
   Process {
-    $testContainerData = @{
-      path        = $Path
-      excludePath = $ExcludePath
+    if ($PSCmdlet.ParameterSetName -like 'Content*') {
+      $testContainerData = @{
+        content = $Content
+      }
+    } else {
+      $testContainerData = @{
+        path        = $Path
+        excludePath = $ExcludePath
+      }
     }
 
     # Create Pester configuration
@@ -46,7 +58,7 @@ Function Test-JSONContent {
     $config.should.ErrorAction = 'Continue'
 
     # Configure Pester test result output based on parameter set name
-    if ($PSCmdlet.ParameterSetName -eq 'ProduceOutputFile') {
+    if ($PSCmdlet.ParameterSetName -like '*ProduceOutputFile') {
       $config.TestResult.OutputFormat = $OutputFormat
       $config.TestResult.OutputPath = $OutputFile
     } else {
@@ -65,25 +77,31 @@ Function Test-JSONContent {
 
 # .EXTERNALHELP AzPolicyTest-help.xml
 Function Test-AzPolicyDefinition {
-  [CmdLetBinding()]
+  [CmdLetBinding(DefaultParameterSetName = 'PathNoOutputFile')]
   Param (
-    [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'ProduceOutputFile', HelpMessage = 'Specify the file paths for the policy definition files.')]
-    [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'NoOutputFile', HelpMessage = 'Specify the file paths for the policy definition files.')]
+    [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'PathProduceOutputFile', HelpMessage = 'Specify the file paths for the policy definition files.')]
+    [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'PathNoOutputFile', HelpMessage = 'Specify the file paths for the policy definition files.')]
     [String] $Path,
 
-    [Parameter(Mandatory = $false, ParameterSetName = 'ProduceOutputFile', HelpMessage = 'Specify the excluded file paths for the policy definition files.')]
-    [Parameter(Mandatory = $false, ParameterSetName = 'NoOutputFile', HelpMessage = 'Specify the excluded file paths for the policy definition files.')]
+    [Parameter(Mandatory = $false, ParameterSetName = 'PathProduceOutputFile', HelpMessage = 'Specify the excluded file paths for the policy definition files.')]
+    [Parameter(Mandatory = $false, ParameterSetName = 'PathNoOutputFile', HelpMessage = 'Specify the excluded file paths for the policy definition files.')]
     [String[]] $ExcludePath,
 
-    [Parameter(Mandatory = $false, ParameterSetName = 'ProduceOutputFile', HelpMessage = 'Specify the tags for excluded tests.')]
-    [Parameter(Mandatory = $false, ParameterSetName = 'NoOutputFile', HelpMessage = 'Specify the tags for excluded tests.')]
+    [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'ContentProduceOutputFile', HelpMessage = 'Specify the JSON content of a single file to test.')]
+    [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'ContentNoOutputFile', HelpMessage = 'Specify the JSON content of a single file to test.')]
+    [ValidateNotNullOrEmpty()]
+    [String] $Content,
+
+    [Parameter(Mandatory = $false, HelpMessage = 'Specify the tags for excluded tests.')]
     [String[]] $ExcludeTags = @(),
 
-    [Parameter(ParameterSetName = 'ProduceOutputFile', Mandatory = $true)]
+    [Parameter(ParameterSetName = 'PathProduceOutputFile', Mandatory = $true)]
+    [Parameter(ParameterSetName = 'ContentProduceOutputFile', Mandatory = $true)]
     [ValidateNotNullOrEmpty()]
     [string] $OutputFile,
 
-    [Parameter(ParameterSetName = 'ProduceOutputFile', Mandatory = $false)]
+    [Parameter(ParameterSetName = 'PathProduceOutputFile', Mandatory = $false)]
+    [Parameter(ParameterSetName = 'ContentProduceOutputFile', Mandatory = $false)]
     [ValidateSet('NUnitXml', 'LegacyNUnitXML')]
     [string] $OutputFormat = 'NUnitXml'
   )
@@ -95,9 +113,15 @@ Function Test-AzPolicyDefinition {
   }
 
   Process {
-    $testContainerData = @{
-      path        = $Path
-      excludePath = $ExcludePath
+    if ($PSCmdlet.ParameterSetName -like 'Content*') {
+      $testContainerData = @{
+        content = $Content
+      }
+    } else {
+      $testContainerData = @{
+        path        = $Path
+        excludePath = $ExcludePath
+      }
     }
 
     # Create Pester configuration
@@ -111,7 +135,7 @@ Function Test-AzPolicyDefinition {
     $config.should.ErrorAction = 'Continue'
 
     # Configure Pester test result output based on parameter set name
-    if ($PSCmdlet.ParameterSetName -eq 'ProduceOutputFile') {
+    if ($PSCmdlet.ParameterSetName -like '*ProduceOutputFile') {
       $config.TestResult.OutputFormat = $OutputFormat
       $config.TestResult.OutputPath = $OutputFile
     } else {
@@ -130,25 +154,31 @@ Function Test-AzPolicyDefinition {
 
 # .EXTERNALHELP AzPolicyTest-help.xml
 Function Test-AzPolicySetDefinition {
-  [CmdLetBinding()]
+  [CmdLetBinding(DefaultParameterSetName = 'PathNoOutputFile')]
   Param (
-    [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'ProduceOutputFile', HelpMessage = 'Specify the file paths for the policy set definition files.')]
-    [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'NoOutputFile', HelpMessage = 'Specify the file paths for the policy set definition files.')]
+    [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'PathProduceOutputFile', HelpMessage = 'Specify the file paths for the policy set definition files.')]
+    [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'PathNoOutputFile', HelpMessage = 'Specify the file paths for the policy set definition files.')]
     [String] $Path,
 
-    [Parameter(Mandatory = $false, ParameterSetName = 'ProduceOutputFile', HelpMessage = 'Specify the excluded file paths for the policy set definition files.')]
-    [Parameter(Mandatory = $false, ParameterSetName = 'NoOutputFile', HelpMessage = 'Specify the excluded file paths for the policy set definition files.')]
+    [Parameter(Mandatory = $false, ParameterSetName = 'PathProduceOutputFile', HelpMessage = 'Specify the excluded file paths for the policy set definition files.')]
+    [Parameter(Mandatory = $false, ParameterSetName = 'PathNoOutputFile', HelpMessage = 'Specify the excluded file paths for the policy set definition files.')]
     [String[]] $ExcludePath,
 
-    [Parameter(Mandatory = $false, ParameterSetName = 'ProduceOutputFile', HelpMessage = 'Specify the tags for excluded tests.')]
-    [Parameter(Mandatory = $false, ParameterSetName = 'NoOutputFile', HelpMessage = 'Specify the tags for excluded tests.')]
+    [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'ContentProduceOutputFile', HelpMessage = 'Specify the JSON content of a single file to test.')]
+    [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'ContentNoOutputFile', HelpMessage = 'Specify the JSON content of a single file to test.')]
+    [ValidateNotNullOrEmpty()]
+    [String] $Content,
+
+    [Parameter(Mandatory = $false, HelpMessage = 'Specify the tags for excluded tests.')]
     [String[]] $ExcludeTags = @(),
 
-    [Parameter(ParameterSetName = 'ProduceOutputFile', Mandatory = $true)]
+    [Parameter(ParameterSetName = 'PathProduceOutputFile', Mandatory = $true)]
+    [Parameter(ParameterSetName = 'ContentProduceOutputFile', Mandatory = $true)]
     [ValidateNotNullOrEmpty()]
     [string] $OutputFile,
 
-    [Parameter(ParameterSetName = 'ProduceOutputFile', Mandatory = $false)]
+    [Parameter(ParameterSetName = 'PathProduceOutputFile', Mandatory = $false)]
+    [Parameter(ParameterSetName = 'ContentProduceOutputFile', Mandatory = $false)]
     [ValidateSet('NUnitXml', 'LegacyNUnitXML')]
     [string] $OutputFormat = 'NUnitXml'
   )
@@ -160,9 +190,15 @@ Function Test-AzPolicySetDefinition {
   }
 
   Process {
-    $testContainerData = @{
-      path        = $Path
-      excludePath = $ExcludePath
+    if ($PSCmdlet.ParameterSetName -like 'Content*') {
+      $testContainerData = @{
+        content = $Content
+      }
+    } else {
+      $testContainerData = @{
+        path        = $Path
+        excludePath = $ExcludePath
+      }
     }
 
     # Create Pester configuration
@@ -172,11 +208,11 @@ Function Test-AzPolicySetDefinition {
     $config.Run.PassThru = $true
     $config.Output.verbosity = 'Detailed'
     $config.TestResult.Enabled = $true
-    $config.TestResult.TestSuiteName = 'JPolicy Initiative Tests'
+    $config.TestResult.TestSuiteName = 'Policy Initiative Tests'
     $config.should.ErrorAction = 'Continue'
 
     # Configure Pester test result output based on parameter set name
-    if ($PSCmdlet.ParameterSetName -eq 'ProduceOutputFile') {
+    if ($PSCmdlet.ParameterSetName -like '*ProduceOutputFile') {
       $config.TestResult.OutputFormat = $OutputFormat
       $config.TestResult.OutputPath = $OutputFile
     } else {
