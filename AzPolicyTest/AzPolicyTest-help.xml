@@ -36,6 +36,13 @@
           </maml:description>
           <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>PesterVerbosity</maml:name>
+          <maml:description>
+            <maml:para>Specify Pester output verbosity. Use 'None' to suppress Pester output in stdout.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
+        </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Test-AzPolicyDefinition</maml:name>
@@ -74,6 +81,13 @@
           </maml:description>
           <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>PesterVerbosity</maml:name>
+          <maml:description>
+            <maml:para>Specify Pester output verbosity. Use 'None' to suppress Pester output in stdout.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
+        </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Test-AzPolicyDefinition</maml:name>
@@ -90,6 +104,13 @@
             <maml:para>Specify the tags for excluded tests.</maml:para>
           </maml:description>
           <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>PesterVerbosity</maml:name>
+          <maml:description>
+            <maml:para>Specify Pester output verbosity. Use 'None' to suppress Pester output in stdout.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
         </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
@@ -119,6 +140,13 @@
           <maml:name>OutputFormat</maml:name>
           <maml:description>
             <maml:para>Specify the output format of the Pester test result file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>PesterVerbosity</maml:name>
+          <maml:description>
+            <maml:para>Specify Pester output verbosity. Use 'None' to suppress Pester output in stdout.</maml:para>
           </maml:description>
           <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
         </command:parameter>
@@ -166,6 +194,13 @@
           <maml:para>Specify the file paths for the policy definition files.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+        <maml:name>PesterVerbosity</maml:name>
+        <maml:description>
+          <maml:para>Specify Pester output verbosity. Use 'None' to suppress Pester output in stdout.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
       </command:parameter>
       <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
         <maml:name>ProgressAction</maml:name>
@@ -253,10 +288,10 @@ C:\PS&gt; Test-AzPolicyDefinition -Path "C:\PolicyDefinitionFolder\" -OutputFile
         <maml:title>--------- EXAMPLE 5 ---------</maml:title>
         <maml:introduction>
           <maml:para>```powershell
-C:\PS&gt; Test-AzPolicyDefinition -Path "C:\PolicyDefinitionFolder\" -OutputFile "C:\Temp\MyTestResult.xml" -OutputFormat 'NUnitXML' -ExcludePath 'excludeFolder', 'main.json'
+C:\PS&gt; Test-AzPolicyDefinition -Path "C:\PolicyDefinitionFolder\" -OutputFile "C:\Temp\MyTestResult.xml" -OutputFormat 'NUnitXML' -ExcludePath 'excludeFolder', 'main.json' -PesterVerbosity 'None'
 ```</maml:para>
           <maml:para>&#x80;</maml:para>
-          <maml:para>Test all Azure Policy definitions in a folder, exclude all files in 'excludeFolder' folder and all files with the name 'main.json' then store the test result in a file with the 'NUnitXML' format.</maml:para>
+          <maml:para>Test all Azure Policy definitions in a folder, exclude all files in 'excludeFolder' folder and all files with the name 'main.json' then store the test result in a file with the 'NUnitXML' format. Suppress Pester output in stdout by setting `-PesterVerbosity` to 'None'.</maml:para>
         </maml:introduction>
         <dev:code />
         <dev:remarks />
@@ -336,6 +371,13 @@ policy set) definitions</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>PesterVerbosity</maml:name>
+          <maml:description>
+            <maml:para>Specify Pester output verbosity. Use 'None' to suppress Pester output in stdout.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
+        </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Test-AzPolicySetDefinition</maml:name>
@@ -374,6 +416,13 @@ policy set) definitions</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>PesterVerbosity</maml:name>
+          <maml:description>
+            <maml:para>Specify Pester output verbosity. Use 'None' to suppress Pester output in stdout.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
+        </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Test-AzPolicySetDefinition</maml:name>
@@ -390,6 +439,13 @@ policy set) definitions</maml:para>
             <maml:para>Specify the tags for excluded tests.</maml:para>
           </maml:description>
           <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>PesterVerbosity</maml:name>
+          <maml:description>
+            <maml:para>Specify Pester output verbosity. Use 'None' to suppress Pester output in stdout.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
         </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
@@ -419,6 +475,13 @@ policy set) definitions</maml:para>
           <maml:name>OutputFormat</maml:name>
           <maml:description>
             <maml:para>Specify the output format of the Pester test result file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>PesterVerbosity</maml:name>
+          <maml:description>
+            <maml:para>Specify Pester output verbosity. Use 'None' to suppress Pester output in stdout.</maml:para>
           </maml:description>
           <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
         </command:parameter>
@@ -466,6 +529,13 @@ policy set) definitions</maml:para>
           <maml:para>Specify the file paths for the policy set definition files.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+        <maml:name>PesterVerbosity</maml:name>
+        <maml:description>
+          <maml:para>Specify Pester output verbosity. Use 'None' to suppress Pester output in stdout.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
       </command:parameter>
       <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
         <maml:name>ProgressAction</maml:name>
@@ -553,10 +623,10 @@ C:\PS&gt; Test-AzPolicySetDefinition -Path "C:\PolicyDefinitionFolder\" -OutputF
         <maml:title>--------- EXAMPLE 5 ---------</maml:title>
         <maml:introduction>
           <maml:para>```powershell
-C:\PS&gt; Test-AzPolicySetDefinition -Path "C:\PolicyDefinitionFolder\" -OutputFile "C:\Temp\MyTestResult.xml" -OutputFormat 'NUnitXML' -ExcludePath 'excludeFolder', 'main.json'
+C:\PS&gt; Test-AzPolicySetDefinition -Path "C:\PolicyDefinitionFolder\" -OutputFile "C:\Temp\MyTestResult.xml" -OutputFormat 'NUnitXML' -ExcludePath 'excludeFolder', 'main.json' -PesterVerbosity 'None'
 ```</maml:para>
           <maml:para>&#x80;</maml:para>
-          <maml:para>Test all Azure Policy initiative definitions in a folder, exclude all files in 'excludeFolder' folder and all files with the name 'main.json' then store the test result in a file with the 'NUnitXML' format.</maml:para>
+          <maml:para>Test all Azure Policy initiative definitions in a folder, exclude all files in 'excludeFolder' folder and all files with the name 'main.json' then store the test result in a file with the 'NUnitXML' format. Suppress Pester output in stdout by setting `-PesterVerbosity` to 'None'.</maml:para>
         </maml:introduction>
         <dev:code />
         <dev:remarks />
@@ -635,6 +705,13 @@ C:\PS&gt; Test-AzPolicySetDefinition -Content $json -OutputFile "C:\Temp\MyTestR
           </maml:description>
           <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>PesterVerbosity</maml:name>
+          <maml:description>
+            <maml:para>Specify Pester output verbosity. Use 'None' to suppress Pester output in stdout.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
+        </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Test-JSONContent</maml:name>
@@ -673,6 +750,13 @@ C:\PS&gt; Test-AzPolicySetDefinition -Content $json -OutputFile "C:\Temp\MyTestR
           </maml:description>
           <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>PesterVerbosity</maml:name>
+          <maml:description>
+            <maml:para>Specify Pester output verbosity. Use 'None' to suppress Pester output in stdout.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
+        </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Test-JSONContent</maml:name>
@@ -689,6 +773,13 @@ C:\PS&gt; Test-AzPolicySetDefinition -Content $json -OutputFile "C:\Temp\MyTestR
             <maml:para>Specify the tags for excluded tests.</maml:para>
           </maml:description>
           <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>PesterVerbosity</maml:name>
+          <maml:description>
+            <maml:para>Specify Pester output verbosity. Use 'None' to suppress Pester output in stdout.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
         </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
@@ -718,6 +809,13 @@ C:\PS&gt; Test-AzPolicySetDefinition -Content $json -OutputFile "C:\Temp\MyTestR
           <maml:name>OutputFormat</maml:name>
           <maml:description>
             <maml:para>Specify the output format of the Pester test result file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+          <maml:name>PesterVerbosity</maml:name>
+          <maml:description>
+            <maml:para>Specify Pester output verbosity. Use 'None' to suppress Pester output in stdout.</maml:para>
           </maml:description>
           <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
         </command:parameter>
@@ -765,6 +863,13 @@ C:\PS&gt; Test-AzPolicySetDefinition -Content $json -OutputFile "C:\Temp\MyTestR
           <maml:para>Specify the file paths for the policy definition files.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="true">String</command:parameterValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
+        <maml:name>PesterVerbosity</maml:name>
+        <maml:description>
+          <maml:para>Specify Pester output verbosity. Use 'None' to suppress Pester output in stdout.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
       </command:parameter>
       <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named" aliases="none">
         <maml:name>ProgressAction</maml:name>
@@ -852,10 +957,10 @@ C:\PS&gt; Test-JSONContent -Path "C:\PolicyDefinitionFolder\" -OutputFile "C:\Te
         <maml:title>--------- EXAMPLE 5 ---------</maml:title>
         <maml:introduction>
           <maml:para>```powershell
-C:\PS&gt; Test-JSONContent -Path "C:\PolicyDefinitionFolder\" -OutputFile "C:\Temp\MyTestResult.xml" -OutputFormat 'NUnitXML' -ExcludePath 'excludeFolder', 'main.json'
+C:\PS&gt; Test-JSONContent -Path "C:\PolicyDefinitionFolder\" -OutputFile "C:\Temp\MyTestResult.xml" -OutputFormat 'NUnitXML' -ExcludePath 'excludeFolder', 'main.json' -PesterVerbosity 'None'
 ```</maml:para>
           <maml:para>&#x80;</maml:para>
-          <maml:para>Perform JSON Syntax testing on all JSON files in a folder and its subfolders, exclude all files in 'excludeFolder' folder and all files with the name 'main.json' then store the test result in a file with the 'NUnitXML' format.</maml:para>
+          <maml:para>Perform JSON Syntax testing on all JSON files in a folder and its subfolders, exclude all files in 'excludeFolder' folder and all files with the name 'main.json' then store the test result in a file with the 'NUnitXML' format. Suppress Pester output in stdout by setting `-PesterVerbosity` to 'None'.</maml:para>
         </maml:introduction>
         <dev:code />
         <dev:remarks />

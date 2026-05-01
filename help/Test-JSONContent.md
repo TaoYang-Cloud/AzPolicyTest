@@ -17,28 +17,28 @@ Perform Pester Test to validate syntax of JSON files.
 
 ```
 Test-JSONContent -Path <String> [-ExcludePath <String[]>] [-ExcludeTags <String[]>]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-PesterVerbosity <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### PathProduceOutputFile
 
 ```
 Test-JSONContent -Path <String> [-ExcludePath <String[]>] [-ExcludeTags <String[]>] -OutputFile <String>
- [-OutputFormat <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-OutputFormat <String>] [-PesterVerbosity <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### ContentNoOutputFile
 
 ```
-Test-JSONContent -Content <String> [-ExcludeTags <String[]>] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Test-JSONContent -Content <String> [-ExcludeTags <String[]>] [-PesterVerbosity <String>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### ContentProduceOutputFile
 
 ```
 Test-JSONContent -Content <String> [-ExcludeTags <String[]>] -OutputFile <String>
- [-OutputFormat <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-OutputFormat <String>] [-PesterVerbosity <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -80,10 +80,10 @@ Perform JSON Syntax testing on all JSON files in a folder and its subfolders, ex
 ### EXAMPLE 5
 
 ```powershell
-C:\PS> Test-JSONContent -Path "C:\PolicyDefinitionFolder\" -OutputFile "C:\Temp\MyTestResult.xml" -OutputFormat 'NUnitXML' -ExcludePath 'excludeFolder', 'main.json'
+C:\PS> Test-JSONContent -Path "C:\PolicyDefinitionFolder\" -OutputFile "C:\Temp\MyTestResult.xml" -OutputFormat 'NUnitXML' -ExcludePath 'excludeFolder', 'main.json' -PesterVerbosity 'None'
 ```
 
-Perform JSON Syntax testing on all JSON files in a folder and its subfolders, exclude all files in 'excludeFolder' folder and all files with the name 'main.json' then store the test result in a file with the 'NUnitXML' format.
+Perform JSON Syntax testing on all JSON files in a folder and its subfolders, exclude all files in 'excludeFolder' folder and all files with the name 'main.json' then store the test result in a file with the 'NUnitXML' format. Suppress Pester output in stdout by setting `-PesterVerbosity` to 'None'.
 
 ### EXAMPLE 6
 
@@ -198,6 +198,23 @@ Aliases:
 Required: False
 Position: Named
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -PesterVerbosity
+
+Specify Pester output verbosity. Use 'None' to suppress Pester output in stdout.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+Accepted values: None, Normal, Detailed, Diagnostic
+
+Required: False
+Position: Named
+Default value: Detailed
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
