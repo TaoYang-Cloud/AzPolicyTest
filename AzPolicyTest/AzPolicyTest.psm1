@@ -26,7 +26,11 @@ Function Test-JSONContent {
     [Parameter(ParameterSetName = 'PathProduceOutputFile', Mandatory = $false)]
     [Parameter(ParameterSetName = 'ContentProduceOutputFile', Mandatory = $false)]
     [ValidateSet('NUnitXml', 'LegacyNUnitXML')]
-    [string] $OutputFormat = 'NUnitXml'
+    [string] $OutputFormat = 'NUnitXml',
+
+    [Parameter(Mandatory = $false, HelpMessage = 'Specify Pester output verbosity. Use ''None'' to suppress Pester output in stdout.')]
+    [ValidateSet('None', 'Normal', 'Detailed', 'Diagnostic')]
+    [string] $PesterVerbosity = 'Detailed'
   )
 
   Begin {
@@ -52,7 +56,7 @@ Function Test-JSONContent {
     $config = New-PesterConfiguration
     $config.Run.Container = $container
     $config.Run.PassThru = $true
-    $config.Output.verbosity = 'Detailed'
+    $config.Output.verbosity = $PesterVerbosity
     $config.TestResult.Enabled = $true
     $config.TestResult.TestSuiteName = 'Json Content Tests'
     $config.should.ErrorAction = 'Continue'
@@ -103,7 +107,11 @@ Function Test-AzPolicyDefinition {
     [Parameter(ParameterSetName = 'PathProduceOutputFile', Mandatory = $false)]
     [Parameter(ParameterSetName = 'ContentProduceOutputFile', Mandatory = $false)]
     [ValidateSet('NUnitXml', 'LegacyNUnitXML')]
-    [string] $OutputFormat = 'NUnitXml'
+    [string] $OutputFormat = 'NUnitXml',
+
+    [Parameter(Mandatory = $false, HelpMessage = 'Specify Pester output verbosity. Use ''None'' to suppress Pester output in stdout.')]
+    [ValidateSet('None', 'Normal', 'Detailed', 'Diagnostic')]
+    [string] $PesterVerbosity = 'Detailed'
   )
 
   Begin {
@@ -129,7 +137,7 @@ Function Test-AzPolicyDefinition {
     $config = New-PesterConfiguration
     $config.Run.Container = $container
     $config.Run.PassThru = $true
-    $config.Output.verbosity = 'Detailed'
+    $config.Output.verbosity = $PesterVerbosity
     $config.TestResult.Enabled = $true
     $config.TestResult.TestSuiteName = 'Policy Definition Tests'
     $config.should.ErrorAction = 'Continue'
@@ -180,7 +188,11 @@ Function Test-AzPolicySetDefinition {
     [Parameter(ParameterSetName = 'PathProduceOutputFile', Mandatory = $false)]
     [Parameter(ParameterSetName = 'ContentProduceOutputFile', Mandatory = $false)]
     [ValidateSet('NUnitXml', 'LegacyNUnitXML')]
-    [string] $OutputFormat = 'NUnitXml'
+    [string] $OutputFormat = 'NUnitXml',
+
+    [Parameter(Mandatory = $false, HelpMessage = 'Specify Pester output verbosity. Use ''None'' to suppress Pester output in stdout.')]
+    [ValidateSet('None', 'Normal', 'Detailed', 'Diagnostic')]
+    [string] $PesterVerbosity = 'Detailed'
   )
 
   Begin {
@@ -206,7 +218,7 @@ Function Test-AzPolicySetDefinition {
     $config = New-PesterConfiguration
     $config.Run.Container = $container
     $config.Run.PassThru = $true
-    $config.Output.verbosity = 'Detailed'
+    $config.Output.verbosity = $PesterVerbosity
     $config.TestResult.Enabled = $true
     $config.TestResult.TestSuiteName = 'Policy Initiative Tests'
     $config.should.ErrorAction = 'Continue'
