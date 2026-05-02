@@ -103,7 +103,7 @@ if ($PSCmdlet.ParameterSetName -ieq 'Path') {
 }
 
 Foreach ($testCase in $testCases) {
-  Write-Verbose "Test '$($testCase.fileName)'" -verbose
+  Write-Verbose "Test '$($testCase.fileName)'"
   Describe "[$($testCase.fileRelativePath)]: $TestName" -Tag 'policyDefSyntax' {
     BeforeAll {
       # Variables - Use Script scope to make PSScriptAnalyzer happy <https://github.com/PowerShell/PSScriptAnalyzer/issues/1641>
