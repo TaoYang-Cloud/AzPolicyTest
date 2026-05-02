@@ -36,7 +36,7 @@ Function Test-JSONContent {
   Begin {
     # Test files
     $FileContentTestFilePath = Join-Path $PSScriptRoot 'fileContent.tests.ps1'
-    Write-Verbose "JSON Content Pester Test file Path: '$FileContentTestFilePath'" -verbose
+    Write-Verbose "JSON Content Pester Test file Path: '$FileContentTestFilePath'"
   }
 
   Process {
@@ -117,7 +117,7 @@ Function Test-AzPolicyDefinition {
   Begin {
     # Test files
     $DefinitionStructureTestFilePath = join-path $PSScriptRoot 'policyDefStructure.tests.ps1'
-    Write-Verbose "Policy Definition Pester Test file Path: '$DefinitionStructureTestFilePath'" -verbose
+    Write-Verbose "Policy Definition Pester Test file Path: '$DefinitionStructureTestFilePath'"
   }
 
   Process {
@@ -198,7 +198,7 @@ Function Test-AzPolicySetDefinition {
   Begin {
     # Test files
     $DefinitionStructureTestFilePath = join-path $PSScriptRoot 'policySetDefStructure.tests.ps1'
-    Write-Verbose "Policy Initiative Pester Test file Path: '$DefinitionStructureTestFilePath'" -verbose
+    Write-Verbose "Policy Initiative Pester Test file Path: '$DefinitionStructureTestFilePath'"
   }
 
   Process {
