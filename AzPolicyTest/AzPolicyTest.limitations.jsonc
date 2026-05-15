@@ -30,6 +30,8 @@
     "(?i)^Microsoft\\.Compute\\/virtualMachines\\/storageProfile\\.osDisk\\.diskSizeGB$",
     "(?i)^Microsoft\\.Compute\\/virtualMachineScaleSets\\/virtualMachineProfile\\.storageProfile\\.osDisk\\.diskSizeGB$",
     "(?i)^Microsoft\\.Compute\\/virtualMachineScaleSets\\/virtualMachines\\/storageProfile\\.osDisk\\.diskSizeGB$",
-    "(?i)^Microsoft\\.Authorization\\/roleAssignmentScheduleInstances\\/\\S+"
+    "(?i)^Microsoft\\.Authorization\\/roleAssignmentScheduleInstances\\/\\S+",
+    //Undocumented Read-only property
+    "(?i)^Microsoft\\.CognitiveServices\\/accounts\\/capabilities(\\[\\*\\]){0,1}$"
   ]
 }

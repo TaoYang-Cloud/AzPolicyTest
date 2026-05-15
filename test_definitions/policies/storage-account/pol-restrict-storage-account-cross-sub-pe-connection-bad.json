@@ -17,11 +17,7 @@
           "description": "Enable or disable the execution of the audit policy.",
           "displayName": "Effect"
         },
-        "allowedValues": [
-          "Audit",
-          "Deny",
-          "Disabled"
-        ],
+        "allowedValues": ["Audit", "Deny", "Disabled"],
         "defaultValue": "Audit"
       }
     },

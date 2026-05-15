@@ -14,11 +14,7 @@
           "displayName": "Storage Account use Double Encryption effect",
           "description": "'Audit' allows a non-compliant resource to be created, but flags it as non-compliant. 'Deny' blocks the resource creation. 'Disable' turns off the policy."
         },
-        "allowedValues": [
-          "Audit",
-          "Deny",
-          "Disabled"
-        ],
+        "allowedValues": ["Audit", "Deny", "Disabled"],
         "defaultValue": "Audit"
       },
       "blobSoftDeleteEffect": {
@@ -27,10 +23,7 @@
           "displayName": "Deploy Storage Account blob Soft-Delete effect",
           "description": "Enable or disable the execution of the policy"
         },
-        "allowedValues": [
-          "DeployIfNotExists",
-          "Disabled"
-        ],
+        "allowedValues": ["DeployIfNotExists", "Disabled"],
         "defaultValue": "DeployIfNotExists"
       },
       "blobSoftDeleteEvaluationDelay": {
@@ -63,11 +56,7 @@
           "displayName": "Storage accounts should restrict network access effect",
           "description": "'Audit' allows a non-compliant resource to be created, but flags it as non-compliant. 'Deny' blocks the resource creation. 'Disable' turns off the policy."
         },
-        "allowedValues": [
-          "Audit",
-          "Deny",
-          "Disabled"
-        ],
+        "allowedValues": ["Audit", "Deny", "Disabled"],
         "defaultValue": "Deny"
       },
       "restrictVirtualNetworkRulesEffect": {
@@ -76,11 +65,7 @@
           "displayName": "Deny Storage Account restrict virtual network rules effect",
           "description": "'Audit' allows a non-compliant resource to be created, but flags it as non-compliant. 'Deny' blocks the resource creation. 'Disable' turns off the policy."
         },
-        "allowedValues": [
-          "Audit",
-          "Deny",
-          "Disabled"
-        ],
+        "allowedValues": ["Audit", "Deny", "Disabled"],
         "defaultValue": "Deny"
       },
       "preventCrossTenantReplEffect": {
@@ -89,11 +74,7 @@
           "displayName": "Deny Storage Account prevent cross tenant replication effect",
           "description": "'Audit' allows a non-compliant resource to be created, but flags it as non-compliant. 'Deny' blocks the resource creation. 'Disable' turns off the policy."
         },
-        "allowedValues": [
-          "Audit",
-          "Deny",
-          "Disabled"
-        ],
+        "allowedValues": ["Audit", "Deny", "Disabled"],
         "defaultValue": "Deny"
       },
       "preventSharedKeyAccessEffect": {
@@ -102,11 +83,7 @@
           "displayName": "Audit Storage Account should prevent shared key access effect",
           "description": "'Audit' allows a non-compliant resource to be created, but flags it as non-compliant. 'Deny' blocks the resource creation. 'Disable' turns off the policy."
         },
-        "allowedValues": [
-          "Audit",
-          "Deny",
-          "Disabled"
-        ],
+        "allowedValues": ["Audit", "Deny", "Disabled"],
         "defaultValue": "Deny"
       },
       "secureTransferEffect": {
@@ -115,11 +92,7 @@
           "displayName": "Storage Account secure transfer effect",
           "description": "'Audit' allows a non-compliant resource to be created, but flags it as non-compliant. 'Deny' blocks the resource creation. 'Disable' turns off the policy."
         },
-        "allowedValues": [
-          "Deny",
-          "Audit",
-          "Disabled"
-        ],
+        "allowedValues": ["Deny", "Audit", "Disabled"],
         "defaultValue": "Deny"
       },
       "publicEndpointEffect": {
@@ -128,11 +101,7 @@
           "displayName": "Restrict Storage Account public endpoint effect",
           "description": "'Audit' allows a non-compliant resource to be created, but flags it as non-compliant. 'Deny' blocks the resource creation. 'Disabled' turns off the policy."
         },
-        "allowedValues": [
-          "Deny",
-          "Audit",
-          "Disabled"
-        ],
+        "allowedValues": ["Deny", "Audit", "Disabled"],
         "defaultValue": "Deny"
       },
       "minTlsVersion": {
@@ -141,11 +110,7 @@
           "displayName": "Storage Account Minimum TLS Version",
           "description": "Minimum version of TLS required to access data in the storage account"
         },
-        "allowedValues": [
-          "TLS1_0",
-          "TLS1_1",
-          "TLS1_2"
-        ],
+        "allowedValues": ["TLS1_0", "TLS1_1", "TLS1_2"],
         "defaultValue": "TLS1_2"
       },
       "minTlsVersionEffect": {
@@ -154,11 +119,7 @@
           "displayName": "Deny Storage Account minimum TLS version effect",
           "description": "'Audit' allows a non-compliant resource to be created, but flags it as non-compliant. 'Deny' blocks the resource creation. 'Disable' turns off the policy."
         },
-        "allowedValues": [
-          "Deny",
-          "Audit",
-          "Disabled"
-        ],
+        "allowedValues": ["Deny", "Audit", "Disabled"],
         "defaultValue": "Deny"
       },
       "deployAdvThreatProtectionEffect": {
@@ -167,10 +128,7 @@
           "displayName": "Deploy Storage Account Advanced Threat Protection Effect",
           "description": "Enable or disable the execution of the policy"
         },
-        "allowedValues": [
-          "DeployIfNotExists",
-          "Disabled"
-        ],
+        "allowedValues": ["DeployIfNotExists", "Disabled"],
         "defaultValue": "DeployIfNotExists"
       },
       "deployAdvThreatProtectionEvaluationDelay": {
@@ -187,11 +145,17 @@
           "displayName": "Prevent cross-subscription Private Link for Azure Storage Account",
           "description": "Enable or disable the execution of the audit policy."
         },
-        "allowedValues": [
-          "Audit",
-          "Disabled"
-        ],
+        "allowedValues": ["Audit", "Disabled"],
         "defaultValue": "Audit"
+      },
+      "fileSharePublicNetworkAccessEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "File Share Public Network Access Effect",
+          "description": "Enable or disable the execution of the audit policy."
+        },
+        "allowedValues": ["Modify", "Disabled"],
+        "defaultValue": "Modify"
       }
     },
     "policyDefinitionGroups": [
@@ -255,9 +219,7 @@
             "value": "[parameters('doubleEncryptionEffect')]"
           }
         },
-        "groupNames": [
-          "ISO27001-2013_A.10.1.1"
-        ]
+        "groupNames": ["ISO27001-2013_A.10.1.1"]
       },
       {
         "policyDefinitionReferenceId": "STG-03",
@@ -298,9 +260,7 @@
             "value": "[parameters('publicEndpointEffect')]"
           }
         },
-        "groupNames": [
-          "ISO27001-2013_A.13.1.2"
-        ]
+        "groupNames": ["ISO27001-2013_A.13.1.2"]
       },
       {
         "policyDefinitionReferenceId": "STG-06",
@@ -324,10 +284,7 @@
             "value": "[parameters('secureTransferEffect')]"
           }
         },
-        "groupNames": [
-          "ISO27001-2013_A.10.1.1",
-          "ISO27001-2013_A.14.1.2"
-        ]
+        "groupNames": ["ISO27001-2013_A.10.1.1", "ISO27001-2013_A.14.1.2"]
       },
       {
         "policyDefinitionReferenceId": "STG-08",
@@ -354,10 +311,7 @@
             "value": "[parameters('deployAdvThreatProtectionEvaluationDelay')]"
           }
         },
-        "groupNames": [
-          "ISO27001-2013_A.12.2.1",
-          "ISO27001-2013_A.12.6.1"
-        ]
+        "groupNames": ["ISO27001-2013_A.12.2.1", "ISO27001-2013_A.12.6.1"]
       },
       {
         "policyDefinitionReferenceId": "STG-10",
@@ -395,6 +349,17 @@
           "ISO27001-2013_A.17.1.1",
           "ISO27001-2013_A.17.1.2"
         ]
+      },
+      {
+        "policyDefinitionReferenceId": "STG-12",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/32395e13-9837-458f-936d-4b21b1e37694",
+        "definitionVersion": "1.0.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('fileSharePublicNetworkAccessEffect')]"
+          }
+        },
+        "groupNames": ["ISO27001-2013_A.13.1.2"]
       }
     ]
   }
