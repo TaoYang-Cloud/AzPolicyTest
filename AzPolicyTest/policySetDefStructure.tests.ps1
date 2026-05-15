@@ -20,6 +20,18 @@ function CountPolicyDefinitionReferenceId {
   $policy.count
 }
 
+function isBuiltInPolicyDefinition {
+  param(
+    [string] $policyDefinitionId
+  )
+  if ($policyDefinitionId -imatch "^\/providers\/Microsoft\.Authorization\/policyDefinitions\/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$") {
+    $bIsBuiltIn = $true
+  } else {
+    $bIsBuiltIn = $false
+  }
+  $bIsBuiltIn
+}
+
 function IsParameterInUse {
   param(
     [object] $policySetObject,
@@ -307,12 +319,12 @@ Foreach ($testCase in $testCases) {
     }
 
     Context 'Parameters Tests' -Tag 'Parameters' {
-      foreach ($parameterName in $json.properties.parameters.PSObject.Properties.Name) {
-        $parameterConfig = $json.properties.parameters.$parameterName
+      foreach ($parameterName in $testCase.json.properties.parameters.PSObject.Properties.Name) {
+        $parameterConfig = $testCase.json.properties.parameters.$parameterName
         $parameterTestCase = @{
           parameterName   = $parameterName
           parameterConfig = $parameterConfig
-          parameterInUse  = IsParameterInUse -policySetObject $json -parameterName $parameterName
+          parameterInUse  = IsParameterInUse -policySetObject $testCase.json -parameterName $parameterName
         }
 
         It -Name "Parameter [<parameterName>] must contain 'type' element" -TestCases $parameterTestCase -Tag 'ParameterTypeExists' -Test {
@@ -376,10 +388,11 @@ Foreach ($testCase in $testCases) {
 
     Context 'Policy Definitions Test' -Tag 'PolicyDefinitions' {
       $i = 0
-      foreach ($policyDefinition in $json.properties.policyDefinitions) {
+      foreach ($policyDefinition in $testCase.json.properties.policyDefinitions) {
         $i++
         try {
           $policyDefinitionReferenceId = $policyDefinition.policyDefinitionReferenceId
+          $isBuiltInPolicy = isBuiltInPolicyDefinition -policyDefinitionId $policyDefinition.policyDefinitionId
           $policyDefTestTitle = "Policy Definition #$i ($policyDefinitionReferenceId)"
         } catch {
           $policyDefTestTitle = "Policy Definition #$i"
@@ -389,7 +402,7 @@ Foreach ($testCase in $testCases) {
           policyDefinition = $policyDefinition
         }
         $policyDefinitionReferenceIdCountTestCase = @{
-          policyDefinitionReferenceIdCount = CountPolicyDefinitionReferenceId -policySetObject $json -policyDefinitionReferenceId $policyDefinition.policyDefinitionReferenceId
+          policyDefinitionReferenceIdCount = CountPolicyDefinitionReferenceId -policySetObject $testCase.json -policyDefinitionReferenceId $policyDefinition.policyDefinitionReferenceId
         }
         It -Name "$policyDefTestTitle must contain 'policyDefinitionId' element" -TestCases $policyDefinitionTestCase -Tag 'PolicyDefinitionIdExists' -Test {
           param(
@@ -418,7 +431,26 @@ Foreach ($testCase in $testCases) {
           )
           $policyDefinition.policyDefinitionReferenceId.length | Should -BeGreaterThan 0
         }
-
+        if ($isBuiltInPolicy) {
+          It -Name "$policyDefTestTitle built-in policy must contain 'definitionVersion' element" -TestCases $policyDefinitionTestCase -Tag 'builtInPolicyDefinitionVersionExists' -Test {
+            param(
+              [object] $policyDefinition
+            )
+            $policyDefinition.PSobject.properties.name -cmatch 'definitionVersion' | Should -Not -Be $null
+          }
+          It -Name "$policyDefTestTitle built-in policy 'definitionVersion' element must contain value" -TestCases $policyDefinitionTestCase -Tag 'builtInPolicyDefinitionVersionNotEmpty' -Test {
+            param(
+              [object] $policyDefinition
+            )
+            $policyDefinition.definitionVersion.length | Should -BeGreaterThan 0
+          }
+          It -Name "$policyDefTestTitle built-in policy 'definitionVersion' element must not be '*'" -TestCases $policyDefinitionTestCase -Tag 'builtInPolicyDefinitionVersionNotAsterisk' -Test {
+            param(
+              [object] $policyDefinition
+            )
+            $policyDefinition.definitionVersion | Should -Not -Be '*'
+          }
+        }
         It -Name "'policyDefinitionReferenceId' in $policyDefTestTitle must be only used One (1) time" -TestCases $policyDefinitionReferenceIdCountTestCase -Tag 'noDuplicatePolicyDefinitionReferenceId' -Test {
           param(
             [int] $policyDefinitionReferenceIdCount
@@ -453,7 +485,7 @@ Foreach ($testCase in $testCases) {
           $parameterIsDefinedTestCase = @{
             passedInParameter                     = $passedInParameter
             parameterConfig                       = $parameterConfig
-            parameterIsDefined                    = IsParameterDefined -policySetObject $json -parameter $passedInParameter
+            parameterIsDefined                    = IsParameterDefined -policySetObject $testCase.json -parameter $passedInParameter
             valueExpectedFromInitiativeParameters = $valueExpectedFromInitiativeParameters
           }
 
