@@ -1,7 +1,7 @@
 {
   "name": "polset-storage-account-test",
   "properties": {
-    "displayName": "TYANG-Secure Storage Accounts Test",
+    "displayName": "TYANG-Secure Storage Accounts Test.",
     "description": "This policy initiative defines the security requirements for Storage accounts",
     "metadata": {
       "category": "TYANG - Storage Account",
