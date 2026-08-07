@@ -113,7 +113,10 @@ function getBypassedAliases {
   )
   $byPassedAliases = @()
   $knownLimitations = GetKnownLimitations
-  $bypassedAliasesRegex = $knownLimitations.aliasesBypassPolicyRegex
+  $bypassedAliasesRegex = @(
+    $knownLimitations.aliasesBypassPolicyRegex
+    $knownLimitations.aliasesBypassDenyEffectRegex
+  )
   $aliasesUsedByPolicy = GetPolicyAliases -policyObject $policyObject
   foreach ($a in $aliasesUsedByPolicy) {
     foreach ($regex in $bypassedAliasesRegex) {

@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>AzPolicyTest</id>
-    <version>3.3.0</version>
+    <version>3.3.1</version>
     <authors>Tao Yang</authors>
     <owners>Tao Yang</owners>
     <description>Provides pre-defined pester tests for Azure Policy and Initiative definitions</description>
