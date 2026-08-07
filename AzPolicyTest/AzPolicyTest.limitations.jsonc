@@ -33,5 +33,9 @@
     "(?i)^Microsoft\\.Authorization\\/roleAssignmentScheduleInstances\\/\\S+",
     //Undocumented Read-only property
     "(?i)^Microsoft\\.CognitiveServices\\/accounts\\/capabilities(\\[\\*\\]){0,1}$"
+  ],
+  "aliasesBypassDenyEffectRegex": [
+    // This section is for known aliases that do not work with deny effect of a policy. Could be undocumented or reported as a bug in the Azure Policy repo.
+    "(?i)^Microsoft\\.ContainerService\\/managedClusters\\/agentPoolProfiles(\\[\\*\\]){0,1}\\.enableEncryptionAtHost$"
   ]
 }
